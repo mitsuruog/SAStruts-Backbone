@@ -1,0 +1,8 @@
+DaoType=S2JDBC
+DefaultResourcePath=/Seaser-Backbone/src/main/resources
+DefaultRootPackage=com.mitsuruog.proto.seaser.backbone
+DefaultSrcPath=/Seaser-Backbone/src/main/java
+ServletPath=/Seaser-Backbone
+ViewType=SA-Struts
+WebContentsRoot=src/main/webapp/
+eclipse.preferences.version=1

@@ -1,0 +1,145 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Dolteng Auto Generated</title>
+</head>
+<body>
+<h1>Hello World!</h1>
+
+<div id="action">
+<button type="button" id="create">create->POST[/collecion]</button>
+<button type="button" id="read">read->GET[/collection/id]</button>
+<button type="button" id="update">update->PUT[/collection/id]</button>
+<button type="button" id="delete">delete->DELETE[collection/id]</button>
+
+<form>
+	<label>name:
+		<input type="text" name="name">
+	</label>
+	<label>age:
+		<select name="age">
+			<option value="10">10</option>
+			<option value="20">20</option>
+		</select>
+	</label>
+</form>
+
+<ul id="models"></ul>
+</div>
+
+
+<script type="tmpl/text" id="tmpl-model">
+	<li>
+		<span><%- name %></span>
+		<span><%- age %></span>
+	</li>
+</script>
+
+
+<script type="text/javascript" src="js/assets/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/assets/underscore-min.js"></script>
+<script type="text/javascript" src="js/assets/backbone.js"></script>
+<script type="text/javascript" src="js/assets/moment.min.js"></script>
+
+<script type="text/javascript">
+
+(function(){
+
+var PROTO = {
+	Models: {},
+	Collections: {},
+	Views: {}
+};
+
+PROTO.Models.model = Backbone.Model.extend({
+	url: 'model/'
+
+});
+
+PROTO.Collections.collection = Backbone.Collection.extend({
+	model: PROTO.Models.model,
+	url: 'collection/'
+
+});
+
+PROTO.Views.view = Backbone.View.extend({
+	el: '#action',
+	initialize: function(option){
+		this.sampleModel = option.sampleModel;
+		this.collection = new PROTO.Collections.collection([option.sampleModel]);
+	},
+	events: {
+		'click #create': 'create',
+		'click #read': 'read',
+		'click #update': 'update',
+		'click #delete': 'delete'
+	},
+	create: function(){
+		var param = {};
+		_.each($('form').serializeArray(), function(v){
+			param[v.name] = v.value;
+		});
+		Backbone.emulateJSON = true;
+		this.collection.create(new PROTO.Models.model(param),
+				{
+					data: param,
+					success : this.render
+				});
+
+		//OK
+		//Backbone.emulateJSON = true;
+		//this.collection.create(this.sampleModel, {data: this.sampleModel.toJSON()});
+
+		//NG -> Content-Type:application/x-www-form-urlencoded
+		//Backbone.emulateJSON = true;
+		//this.collection.create(this.sampleModel);
+
+		//NG -> Content-Type:application/json
+		//this.collection.create(this.sampleModel);
+
+		//OK -> Content-Type:application/x-www-form-urlencoded; charset=UTF-8
+		//$.ajax({
+		//	url: 'models', type: 'post', data: {name: 'hello'}
+		//});
+	},
+	read: function(){
+		this.collection.fetch({
+			success : this.render
+		});
+	},
+	update: function(){
+		this.sampleModel.save({
+			name: 'fizzbuzz'
+		});
+	},
+	delete: function(){
+		this.sampleModel.destroy();
+	},
+	render: function(data){
+    	var tmpl = _.template($('#tmpl-model').html());
+    	var html, models;
+
+    	models = data.collection.models ? data.collection.models: data.models;
+    	_.each(models, function(model){
+    		html = html + tmpl(model.toJSON());
+    	});
+        $('#models').append(html);
+    }
+});
+
+new PROTO.Views.view({
+	sampleModel: new PROTO.Models.model({
+		name: '小川',
+		age: '36'
+	})
+});
+
+$('body').on('ajaxError', function(event, jqXHR, ajaxSettings, thrownError){
+	console.log('');
+});
+
+})();
+</script>
+
+</body>
+</html>
