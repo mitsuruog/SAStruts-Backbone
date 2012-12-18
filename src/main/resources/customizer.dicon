@@ -61,6 +61,37 @@
         <component class="org.seasar.struts.customizer.ActionCustomizer"/>
       </arg>
     </initMethod>
+
+    <!-- adding -->
+	<!-- 常に基本認証を掛けつつ、ログインだけはログイン認証なしでもOKとする -->
+	<initMethod name="addAspectCustomizer">
+	  <arg>"BasicAuthenticationIntercepter"</arg>
+	</initMethod>
+
+	<initMethod name="addCustomizer">
+      <arg>
+         <component class="org.seasar.framework.container.customizer.AspectCustomizer">
+          <initMethod name="addInterceptorName">
+            <arg>"SessionAuthenticationIntercepter"</arg>
+          </initMethod>
+
+          <!-- ログイン認証したくないクラス定義開始-->
+          <initMethod name="addIgnoreClassPattern">
+            <arg>"com.mitsuruog.proto.seaser.backbone.action"</arg>
+            <arg>"LoginAuthAction"</arg>
+          </initMethod>
+          <!--　こんなのもOK
+          <initMethod name="addIgnoreClassPattern">
+            <arg>"jp.roaso.web.basic"</arg>
+            <arg>"Hoge001Page, Hoge003Page, Hoge004Page"</arg>
+          </initMethod>
+          -->
+          <!-- ログイン認証したくないクラス定義終了-->
+        </component>
+      </arg>
+
+	</initMethod>
+
   </component>
   <component name="serviceCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
     <initMethod name="addCustomizer">
@@ -72,4 +103,5 @@
       </arg>
     </initMethod>
   </component>
+
 </components>

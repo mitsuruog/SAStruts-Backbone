@@ -80,11 +80,8 @@ PROTO.Views.view = Backbone.View.extend({
 			param[v.name] = v.value;
 		});
 		Backbone.emulateJSON = true;
-		this.collection.create(new PROTO.Models.model(param),
-				{
-					data: param,
-					success : this.render
-				});
+		var model = new PROTO.Models.model(param);
+		this.collection.create(model, { data: param, success : this.render });
 
 		//OK
 		//Backbone.emulateJSON = true;
