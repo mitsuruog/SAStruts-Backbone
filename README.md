@@ -16,3 +16,8 @@ SAStruts+Backbone.jsのプロトタイプ
  - （補足）検証メソッドはActionMessagesThrowsInterceptorをDIすればOK。
 + Bacbone.Syncの以下のRESTメソッド
  - PUT
+ - （↑うーん、URLリソース表現として割り切るか、emulateHTTPするか悩む。）
++ 認証周り
+ - 基本認証
+ - Session
+
