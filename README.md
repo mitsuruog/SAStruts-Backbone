@@ -9,6 +9,10 @@ SAStruts+Backbone.jsのプロトタイプ
 + Bacbone.Syncの以下のRESTメソッド
  - GET : JSONでのレスポンス 
  - POST : リクエストパラメータの受け渡し
++ 認証周り
+ - 基本認証
+ - Session
+ - （↑それぞれAction名指定してInterceptできるので、後は実際の実装してみるのみ）
 
 やりたいこと
 ------
@@ -18,6 +22,6 @@ SAStruts+Backbone.jsのプロトタイプ
  - PUT
  - （↑うーん、URLリソース表現として割り切るか、emulateHTTPするか悩む。）
 + 認証周り
- - 基本認証
- - Session
+ - 基本認証（認証ロジックとテスト用ドライバの実装）
+ - Session（認証ロジックとテスト用ドライバの実装）
 
