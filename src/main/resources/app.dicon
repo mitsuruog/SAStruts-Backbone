@@ -11,14 +11,7 @@
 -->
   <component name="actionMessagesThrowsInterceptor" class="com.mitsuruog.proto.seaser.backbone.interceptor.ActionMessagesThrowsInterceptor"/>
 
-  <component name="BasicAuthenticationIntercepter" class="com.mitsuruog.proto.seaser.backbone.interceptor.BasicAuthenticationIntercepter"/>
+  <component name="AccessTraceIntercepter" class="com.mitsuruog.proto.seaser.backbone.interceptor.AccessTraceIntercepter"/>
   <component name="SessionAuthenticationIntercepter" class="com.mitsuruog.proto.seaser.backbone.interceptor.SessionAuthenticationIntercepter"/>
-
-	<component name="chainWithBasicAuthentication" class="org.seasar.framework.aop.interceptors.InterceptorChain">
-	    <initMethod name="add"><arg>BasicAuthenticationIntercepter</arg></initMethod>
-	    <initMethod name="add"><arg>SessionAuthenticationIntercepter</arg></initMethod>
-	</component>
-
-
 
 </components>

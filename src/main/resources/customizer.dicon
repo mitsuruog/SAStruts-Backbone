@@ -65,7 +65,7 @@
     <!-- adding -->
 	<!-- 常に基本認証を掛けつつ、ログインだけはログイン認証なしでもOKとする -->
 	<initMethod name="addAspectCustomizer">
-	  <arg>"BasicAuthenticationIntercepter"</arg>
+	  <arg>"AccessTraceIntercepter"</arg>
 	</initMethod>
 
 	<initMethod name="addCustomizer">
@@ -92,6 +92,16 @@
 
 	</initMethod>
 
+	<initMethod name="addCustomizer">
+	  <arg>
+	    <component class="jp.ardito.seasar.struts.customizer.A3ActionCustomizer">
+	      <initMethod name="addGlobalProxyClass">
+	        <arg>@com.mitsuruog.proto.seaser.backbone.proxy.AccessTraceProxy@class</arg>
+	      </initMethod>
+	    </component>
+	  </arg>
+	</initMethod>
+
   </component>
   <component name="serviceCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
     <initMethod name="addCustomizer">
@@ -104,4 +114,5 @@
     </initMethod>
   </component>
 
+  <component name="proxyCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain"/>
 </components>

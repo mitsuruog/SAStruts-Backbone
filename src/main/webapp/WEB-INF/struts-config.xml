@@ -25,16 +25,23 @@
 
     <action-mappings>
     </action-mappings>
-    
+
 
 <!-- ===================================== Controller Configuration -->
 
+	<!-- delete sastruts-extensionのための設定
     <controller
         maxFileSize="1024K"
         bufferSize="1024"
         processorClass="org.seasar.struts.action.S2RequestProcessor"
         multipartClass="org.seasar.struts.upload.S2MultipartRequestHandler"/>
+	 -->
 
+	<controller
+        maxFileSize="1024K"
+        bufferSize="1024"
+		processorClass="jp.ardito.seasar.struts.action.A3RequestProcessor"
+        multipartClass="org.seasar.struts.upload.S2MultipartRequestHandler"/>
 
 <!-- ================================ Message Resources Definitions -->
 

@@ -15,10 +15,14 @@
  */
 package com.mitsuruog.proto.seaser.backbone.action;
 
+import jp.ardito.seasar.struts.proxy.Proxy;
+import jp.ardito.seasar.struts.proxy.ProxyType;
+
 import org.seasar.struts.annotation.Execute;
 
 public class IndexAction {
 
+	@Proxy(type = ProxyType.DEFAULT)
     @Execute(validator = false)
 	public String index() {
         return "index.html";

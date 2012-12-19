@@ -12,10 +12,15 @@ public class SessionAuthenticationIntercepter extends AbstractInterceptor {
 
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
+
 		System.out.println("session intercepter before");
+
+		//ここで認証されているかのチェックを行う。
+
 		Object ret = invocation.proceed();
 		System.out.println("session intercepter after");
 		return ret;
+
 	}
 
 }
